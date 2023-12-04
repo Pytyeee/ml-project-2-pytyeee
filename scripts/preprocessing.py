@@ -46,14 +46,20 @@ def value_to_class(patch):
     else:  # bgrd
         return [1, 0]
 
-def extract_data(filename, num_images, patching=False):
+def extract_data(filename, num_images, patching=False, test=False):
     """Extract the images into a 4D tensor [image index, y, x, channels].
     Values are rescaled from [0, 255] down to [-0.5, 0.5].
     """
+    def extract_name(filename, i):
+        if test:
+            return f"{filename}test_{i}/test_{i}.png"
+        else :
+            return f"{filename}satImage_{'%.3d' % i}.png"
+
     data = []
     for i in range(1, num_images + 1):
-        imageid = "satImage_%.3d" % i
-        image_filename = filename + imageid + ".png"
+        image_filename = extract_name(filename, i)
+
         if os.path.isfile(image_filename):
             if i == 1 or i == num_images:
                 print("Loading " + image_filename)
