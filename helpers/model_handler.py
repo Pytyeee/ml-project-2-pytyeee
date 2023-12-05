@@ -23,6 +23,23 @@ def save_model(model):
     while os.path.exists(MODEL_SAVE_PATH + filename + str(i) + ".pt"):
         i += 1
 
-    torch.save(model.state_dict(), MODEL_SAVE_PATH + filename + str(i) + ".pt")
+    torch.save(model, MODEL_SAVE_PATH + filename + str(i) + ".pt")
 
     print("Model saved to " + MODEL_SAVE_PATH + filename + str(i) + ".pt")
+
+def load_model(name):
+    """
+    Load previously saved model. Warning: loads entire architecture and structure of the model
+
+    Args:
+        name: file name containing the model
+    
+    Returns:
+        the model
+    """
+    path = MODEL_SAVE_PATH + name
+    assert not(os.path.exists(path)), f"Unable to find {path}"
+    
+    return torch.load(path)
+
+
