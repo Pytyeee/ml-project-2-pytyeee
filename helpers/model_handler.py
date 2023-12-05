@@ -38,7 +38,7 @@ def load_model(name):
         the model
     """
     path = MODEL_SAVE_PATH + name
-    assert not(os.path.exists(path)), f"Unable to find {path}"
+    assert os.path.exists(path), f"Unable to find {path}"
     
     return torch.load(path)
 
