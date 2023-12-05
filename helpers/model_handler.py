@@ -1,6 +1,6 @@
 import os
 import torch
-import datetime
+from datetime import datetime
 
 MODEL_SAVE_PATH = '../model/'
 
