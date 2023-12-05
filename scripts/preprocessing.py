@@ -8,6 +8,7 @@ import torch
 # IMG_PATCH_SIZE should be a multiple of 4
 # image size should be an integer multiple of this number!
 IMG_PATCH_SIZE = 16
+PIXEL_DEPTH = 255
 
 def img_resize(imgs, new_shape):
     """
@@ -122,3 +123,20 @@ def extract_labels(filename, num_images, patching=False):
 
     # Convert to dense 1-hot representation.
     return labels.astype(np.float32)
+
+def img_float_to_uint8(img):
+    rimg = img - np.min(img)
+    rimg = (rimg / np.max(rimg) * PIXEL_DEPTH).round().astype(np.uint8)
+    return rimg
+
+def make_img_overlay(img, predicted_img):
+    w = img.shape[0]
+    h = img.shape[1]
+    color_mask = np.zeros((w, h, 3), dtype=np.uint8)
+    color_mask[:, :, 0] = predicted_img * PIXEL_DEPTH
+
+    img8 = img_float_to_uint8(img)
+    background = Image.fromarray(img8, "RGB").convert("RGBA")
+    overlay = Image.fromarray(color_mask, "RGB").convert("RGBA")
+    new_img = Image.blend(background, overlay, 0.2)
+    return new_img
