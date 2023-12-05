@@ -3,6 +3,7 @@ import matplotlib.image as mpimg
 import numpy as np
 import torchvision.transforms as transforms
 import torch
+from PIL import Image
 
 # Set image patch size in pixels
 # IMG_PATCH_SIZE should be a multiple of 4
