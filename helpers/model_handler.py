@@ -1,6 +1,20 @@
 import os
 import torch
 from datetime import datetime
+from PIL import Image
+
+from scripts.preprocessing import *
+
+def save_predictions(pred_imgs, dir):
+    if not os.path.isdir(dir):
+        os.mkdir(dir)
+        print("Created the directory " + dir)
+
+    for i in range(len(pred_imgs)):
+        imageid = "prediction_" + "_%.3d" % (i+1)
+
+        pred_img_uint8 = img_float_to_uint8(pred_imgs[i])
+        Image.fromarray(pred_img_uint8).save(dir + imageid + ".png")
 
 def save_model(model, path):
     """
