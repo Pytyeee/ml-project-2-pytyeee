@@ -157,3 +157,40 @@ def make_img_overlay(img, predicted_img):
     overlay = Image.fromarray(color_mask, "RGB").convert("RGBA")
     new_img = Image.blend(background, overlay, 0.2)
     return new_img
+
+def split_data(x, y, ratio, seed=None):
+    """
+    Split the dataset based on the split ratio. If ratio is 0.8
+    you will have 80% of your data set dedicated to training
+    and the rest dedicated to testing.
+
+    Args:
+        x: numpy array of shape (N, D), N samples of D features.
+        y: numpy array of shape (N,).
+        ratio: scalar in [0,1]
+        seed: integer.
+
+    Returns:
+        x_tr: numpy array containing the train data.
+        x_te: numpy array containing the test data.
+        y_tr: numpy array containing the train labels.
+        y_te: numpy array containing the test labels.
+    """
+    # set seed
+    if seed != None:
+        np.random.seed(seed)
+    # ***************************************************
+    # split the data based on the given ratio
+    # ***************************************************
+    perm = np.random.permutation(len(y))
+    sep = int(ratio*len(y))
+
+    x_perm = x[perm, :]
+    y_perm = y[perm]
+
+    x_tr, x_te, y_tr, y_te = x_perm[:sep, :], x_perm[sep:, :], y_perm[:sep], y_perm[sep:]
+
+    print(f"Data split on ratio {ratio}: TRAINING {x_tr.shape} & {y_tr.shape} " +
+    f"and TEST {x_te.shape} & {y_te.shape}")
+
+    return x_tr, x_te, y_tr, y_te
