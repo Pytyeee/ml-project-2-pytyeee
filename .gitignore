@@ -1,6 +1,7 @@
 # Dataset
 predictions_training/
 *.DS_Store
+models_ancien/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
