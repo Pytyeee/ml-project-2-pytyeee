@@ -5,6 +5,7 @@ from imgaug.augmentables.segmaps import SegmentationMapsOnImage
 import os
 import matplotlib.image as mpimg
 from PIL import Image
+from preprocessing import *
 
 def load_image(infilename):
     """
