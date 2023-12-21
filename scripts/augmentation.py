@@ -5,7 +5,6 @@ from imgaug.augmentables.segmaps import SegmentationMapsOnImage
 import os
 import matplotlib.image as mpimg
 from PIL import Image
-from preprocessing import *
 
 def load_image(infilename):
     """
@@ -191,6 +190,13 @@ def data_augmentation_shear(image, groundtruth, shear = 20):
 
     return augmented_image, augmented_groundtruth
 
+def img_float_to_uint8(img):
+    """
+    Convert float image into uint8
+    """
+    rimg = img - np.min(img)
+    rimg = (rimg / np.max(rimg) * 255).round().astype(np.uint8)
+    return rimg
 
 def data_augmented(images, groundtruths, path_img, path_msk):
     '''Augment the number of input images by rotation and flip
