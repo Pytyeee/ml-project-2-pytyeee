@@ -53,7 +53,8 @@ We trained our model on a V100 GPU on Google Colab with 16 GO of RAM.
 ## Run the project 
 Clone the repo `git clone <repo_url> //clone the repo`\
 Open the run.ipynb file in your favorite editor and run all the cells\
-You have to change the REPO_DIR parameter with the path to our repo if you run that on Colab
+You have to change the REPO_DIR parameter with the path to our repo if you run that on Colab\
+**Important, you have to run the file on a GPU since the weights are made to be on a GPU**
 
 ## Authors
 - Pauline Theimer-Lienhard
