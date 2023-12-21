@@ -246,6 +246,7 @@ def data_augmented(images, groundtruths):
         augmented_image_crop, augmented_groundtruth_crop = data_augmentation_crop(images[i], groundtruths[i], crop = 0.3)
 
         # Saving the new images and groundtruths
+        save_data_augmented(images[i], groundtruths[i])
         save_data_augmented(augmented_image, augmented_groundtruth)
         save_data_augmented(flipped_image_h, flipped_groundtruth_h)
         save_data_augmented(flipped_image_v, flipped_groundtruth_v)
