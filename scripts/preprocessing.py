@@ -10,22 +10,6 @@ from PIL import Image
 # image size should be an integer multiple of this number!
 IMG_PATCH_SIZE = 16
 PIXEL_DEPTH = 255
-
-def concatenate_images(img, gt_img):
-    n_channels = len(gt_img.shape)
-    w = gt_img.shape[0]
-    h = gt_img.shape[1]
-    if n_channels == 3:
-        cimg = np.concatenate((img, gt_img), axis=1)
-    else:
-        gt_img_3c = np.zeros((w, h, 3), dtype=np.uint8)
-        gt_img8 = img_float_to_uint8(gt_img)
-        gt_img_3c[:, :, 0] = gt_img8
-        gt_img_3c[:, :, 1] = gt_img8
-        gt_img_3c[:, :, 2] = gt_img8
-        img8 = img_float_to_uint8(img)
-        cimg = np.concatenate((img8, gt_img_3c), axis=1)
-    return cimg
     
 def img_resize(imgs, new_shape):
     """
@@ -201,10 +185,10 @@ def load_image(infilename):
 
 # Concatenate an image and its groundtruth
 def concatenate_images(img, gt_img):
-    nChannels = len(gt_img.shape)
+    n_channels = len(gt_img.shape)
     w = gt_img.shape[0]
     h = gt_img.shape[1]
-    if nChannels == 3:
+    if n_channels == 3:
         cimg = np.concatenate((img, gt_img), axis=1)
     else:
         gt_img_3c = np.zeros((w, h, 3), dtype=np.uint8)
