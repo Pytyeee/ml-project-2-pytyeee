@@ -20,7 +20,7 @@ def extract_number(s):
     match = re.search(r'\d+', s)
     return int(match.group()) if match else float('inf')
 
-def make_prediction_file(test_dir, submission_dir):
+def make_prediction_file(SUBMISSION_DIR, TEST_WRITE_DIR):
     """
     Makes a submission in the SUBMISSION_DIR directory and creates it if it does not exist
     With the name:
@@ -34,36 +34,38 @@ def make_prediction_file(test_dir, submission_dir):
         None
     """
 
-    if not os.path.isdir(submission_dir):
-        os.mkdir(submission_dir)
-        print("Created the directory " + submission_dir)
+    if not os.path.isdir(SUBMISSION_DIR):
+        os.mkdir(SUBMISSION_DIR)
+        print("Created the directory " + SUBMISSION_DIR)
 
     print("Making prediction file")
 
     date = datetime.now().strftime("%Y-%m-%d")
-    submission_filename = submission_dir + "submi_date_" + date + ".csv"
+    submission_filename = SUBMISSION_DIR + "submi_date_" + date + ".csv"
 
     image_filenames = []
-    all_dir = os.listdir(test_dir)
+    all_dir = os.listdir(TEST_WRITE_DIR)
     all_dir.sort(key=extract_number) #we have to sort them !
 
     for image_name in all_dir:
-        image_filename = test_dir + image_name
+        image_filename = TEST_WRITE_DIR + image_name
         image_filenames.append(image_filename)
 
-    if test_dir + ".ipynb_checkpoints" in image_filenames:
-      image_filenames.remove(test_dir + ".ipynb_checkpoints")
+    if TEST_WRITE_DIR + ".ipynb_checkpoints" in image_filenames:
+      image_filenames.remove(TEST_WRITE_DIR + ".ipynb_checkpoints")
 
     print(image_filenames)
 
     masks_to_submission(submission_filename, *image_filenames)
     print(f"Submission file made in the location {submission_filename}")
 
+
 def mask_to_submission_strings(image_filename):
     """Reads a single image and outputs the strings that should go into the submission file"""
     img_number = int(re.search(r"(\d+)(?=\D*$)", image_filename).group(1))
     im = mpimg.imread(image_filename)
     patch_size = 16
+    print(img_number)
     for j in range(0, im.shape[1], patch_size):
         for i in range(0, im.shape[0], patch_size):
             patch = im[i:i + patch_size, j:j + patch_size]
