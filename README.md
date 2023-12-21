@@ -51,8 +51,8 @@ Our project repository is organized as follows :
 We trained our model on a V100 GPU on Google Colab with 16 GO of RAM.
 
 ## Run the project 
-Clone the repo `git clone <repo_url> //clone the repo`
-Open the run.ipynb file in your favorite editor and run all the cells 
+Clone the repo `git clone <repo_url> //clone the repo`\
+Open the run.ipynb file in your favorite editor and run all the cells\
 You have to change the REPO_DIR parameter with the path to our repo if you run that on Colab
 
 ## Authors
