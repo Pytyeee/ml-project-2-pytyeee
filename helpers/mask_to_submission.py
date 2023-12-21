@@ -65,7 +65,6 @@ def mask_to_submission_strings(image_filename):
     img_number = int(re.search(r"(\d+)(?=\D*$)", image_filename).group(1))
     im = mpimg.imread(image_filename)
     patch_size = 16
-    print(img_number)
     for j in range(0, im.shape[1], patch_size):
         for i in range(0, im.shape[0], patch_size):
             patch = im[i:i + patch_size, j:j + patch_size]
@@ -86,6 +85,5 @@ if __name__ == '__main__':
     image_filenames = []
     for i in range(1, 51):
         image_filename = 'training/groundtruth/satImage_' + '%.3d' % i + '.png'
-        print(image_filename)
         image_filenames.append(image_filename)
     masks_to_submission(submission_filename, *image_filenames)
