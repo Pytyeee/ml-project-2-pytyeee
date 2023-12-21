@@ -13,13 +13,7 @@ def load_image(infilename):
     data = mpimg.imread(infilename)
     return data
 
-def img_float_to_uint8(img):
-    """
-    Convert float image into uint8
-    """
-    rimg = img - np.min(img)
-    rimg = (rimg / np.max(rimg) * 255).round().astype(np.uint8)
-    return rimg
+
 
 
 # Concatenate an image and its groundtruth

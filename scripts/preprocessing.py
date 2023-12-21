@@ -13,6 +13,8 @@ PIXEL_DEPTH = 255
     
 def img_resize(imgs, new_shape):
     """
+    Resize images imgs to new_shape using interpolation.
+
     Args:
         imgs: np.array
     """
@@ -24,8 +26,10 @@ def img_resize(imgs, new_shape):
 
     return torch.stack(resized_images)
 
-# Extract patches from a given image
 def img_crop(im, w, h):
+    """
+    Crop the image im
+    """
     list_patches = []
     imgwidth = im.shape[0]
     imgheight = im.shape[1]
@@ -71,11 +75,8 @@ def extract_data(filename, num_images, patching=False, test=False):
             print("File " + image_filename + " does not exist")
 
     num_images = len(data)
-    IMG_WIDTH = data[0].shape[0]
-    IMG_HEIGHT = data[0].shape[1]
 
     if patching:
-        N_PATCHES_PER_IMAGE = (IMG_WIDTH / IMG_PATCH_SIZE) * (IMG_HEIGHT / IMG_PATCH_SIZE)
 
         img_patches = [
             img_crop(data[i], IMG_PATCH_SIZE, IMG_PATCH_SIZE) for i in range(num_images)
@@ -89,9 +90,10 @@ def extract_data(filename, num_images, patching=False, test=False):
 
     return np.asarray(data)
 
-# Extract label images
 def extract_labels(filename, num_images, patching=False):
-    """Extract the labels into a 1-hot matrix [image index, label index]."""
+    """
+    Extract the labels into a 1-hot matrix [image index, label index].
+    """
     gt_imgs = []
     for i in range(1, num_images + 1):
         imageid = "satImage_%.3d" % i
@@ -126,8 +128,11 @@ def extract_labels(filename, num_images, patching=False):
     return labels.astype(np.float32)
 
 def img_float_to_uint8(img):
+    """
+    Convert float image into uint8
+    """
     rimg = img - np.min(img)
-    rimg = (rimg / np.max(rimg) * PIXEL_DEPTH).round().astype(np.uint8)
+    rimg = (rimg / np.max(rimg) * 255).round().astype(np.uint8)
     return rimg
 
 def make_img_overlay(img, predicted_img):
