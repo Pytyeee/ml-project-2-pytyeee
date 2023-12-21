@@ -8,16 +8,15 @@ This project aims to identify roads in a set of aerial images from Google Maps. 
 
 ## Requirements
 To run the project, the following librairies/packages are required:
-- Python
-- Numpy
-- Torch
-- Matplotlib
-- PIL
-- Datetime
-- Imgaug
-- Segmentation_models_pytorch
+- Python >= 3.10
+- Numpy >= 1.23.5
+- Torch >= 1.13.1
+- Matplotlib >= 3.7.1
+- PIL >= 9.4.0
+- Imgaug >= 0.4
+- Segmentation_models_pytorch > 0.3.3
 
-They can be installed with `pip install -r requirements.txt`
+They can be installed with `pip install -r requirement.txt`
  
 
 ## Project Structure
@@ -32,9 +31,8 @@ Our project repository is organized as follows :
 │       ├── groundtruth                         # Initial groundtruth
 │       └── images                              # Initial images
 ├── helpers                              # Helpers scripts
-│   └── mask_to_submission.py                 # Create the augmented dataset
-│   └── model_handler.py                 # Create the augmented dataset
-│   └── submission_to_mask.py                 # Create the augmented dataset
+│   └── mask_to_submission.py                 # Helper function to create the submission file
+│   └── model_handler.py                 # Helper function to save and loads the model 
 ├── models                               # Trained models
 ├── notebooks                            # Notebook for training and augmentation
 │   └── augmentation.ipynb                   # Create the augmented dataset
@@ -45,13 +43,19 @@ Our project repository is organized as follows :
 ├── scripts                              # Contains data related scripts   
 │   └── augmentation.py                      # Functions to augment the dataset
 │   └── preprocessing.py                     # Functions to load the images
+├── run.ipynb                            # Contains the steps to run our model and create a csv file sumbmission 
 └── README.md                         
 
 ```
+## Training 
+We trained our model on a V100 GPU on Google Colab with 16 GO of RAM.
 
 ## Run the project 
-We run our model by using the free GPU available on Google Colab. The notebook collab_unet.ipynb can be imported on Google Collab and runned. It imports our GitHub repository. 
+Clone the repo `git clone <repo_url> //clone the repo`
+Open the run.ipynb file in your favorite editor and run all the cells 
+You have to change the REPO_DIR parameter with the path to our repo if you run that on Colab
 
-
-## Results:
-
+## Authors
+- Pauline Theimer-Lienhard
+- Yann Ennassih
+- Timo Achard
