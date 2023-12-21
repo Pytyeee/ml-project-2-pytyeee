@@ -43,7 +43,8 @@ Our project repository is organized as follows :
 ├── scripts                              # Contains data related scripts   
 │   └── augmentation.py                      # Functions to augment the dataset
 │   └── preprocessing.py                     # Functions to load the images
-├── run.ipynb                            # Contains the steps to run our model and create a csv file sumbmission 
+├── run.ipynb                            # Contains the steps to run our model and create a csv file sumbmission
+├── Report_2_ML.pdf                      # Our report which explains all the steps taken to train our model 
 └── README.md                         
 
 ```
