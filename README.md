@@ -24,23 +24,27 @@ They can be installed with `pip install -r requirements.txt`
 Our project repository is organized as follows : 
 ```
 .
-├── dataset                             # Original dataset
+├── dataset                              # Original dataset
 │   ├── test_set_images                     # Testing images (without groundtruth)
 |   └── training                            # Training dataset (with groundtruth)
 │       ├── augmented_groundtruth               # Augmented groundtruths (contains initial groundtruths)
 │       ├── augmented_images                    # Augmented images (contains initial images)
 │       ├── groundtruth                         # Initial groundtruth
 │       └── images                              # Initial images
-├── model_saves                          # Trained models
+├── helpers                              # Helpers scripts
+│   └── mask_to_submission.py                 # Create the augmented dataset
+│   └── model_handler.py                 # Create the augmented dataset
+│   └── submission_to_mask.py                 # Create the augmented dataset
+├── models                               # Trained models
 ├── notebooks                            # Notebook for training and augmentation
-│   └── augmentation.ipynb               # Create the augmented dataset
-│   └── unet_test.ipynb                  # Make the predictions from trained model
-│   └── unet_train.ipynb                 # Trains the model on augmented dataset
-│   └── visualisation.ipynb              # Visualise predictions made 
+│   └── augmentation.ipynb                   # Create the augmented dataset
+│   └── unet_test.ipynb                      # Make the predictions from trained model
+│   └── unet_train.ipynb                     # Trains the model on augmented dataset
+│   └── visualisation.ipynb                  # Visualise predictions made 
 ├── submissions                          # Contains the csv submission files
-├── scripts              
-│   └── augmentation.py                  # Functions to augment the dataset
-│   └── preprocessing.py                 # Functions to load the images
+├── scripts                              # Contains data related scripts   
+│   └── augmentation.py                      # Functions to augment the dataset
+│   └── preprocessing.py                     # Functions to load the images
 └── README.md                         
 
 ```
